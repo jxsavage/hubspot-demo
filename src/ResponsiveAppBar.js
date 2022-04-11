@@ -9,9 +9,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-const logoAlt = `Hubspot Demo Project`
+// const logoAlt = `Hubspot Demo Project`
 
 const ResponsiveAppBar = ({ siteTitle, menuLinks }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
