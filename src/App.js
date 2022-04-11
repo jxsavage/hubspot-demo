@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import logo from "./logo.svg"
 import "./App.css"
+import ResponsiveAppBar from "./ResponsiveAppBar"
+import CRMProvider from "./CRMProvider"
 
 class LambdaDemo extends Component {
   constructor(props) {
@@ -31,20 +33,40 @@ class LambdaDemo extends Component {
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
+// class App extends Component {
+//   render() {
+//     return (
+//       <div className="App">
+//         <header className="App-header">
+//           <img src={logo} className="App-logo" alt="logo" />
+//           <p>
+//             Edit <code>src/App.js</code> and save to reload.
+//           </p>
+//           <LambdaDemo />
+//         </header>
+//       </div>
+//     )
+//   }
+// }
+const menuLinks = [
+  {}
+]
+const siteTitle = `Jake Savage Hubspot API Demo`
+const App = () => {
+  return (
+    <CRMProvider>
+    <div className="App">
+      <ResponsiveAppBar menuLinks={menuLinks} siteTitle={siteTitle} ></ResponsiveAppBar>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <LambdaDemo />
+      </header>
+    </div>
+    </CRMProvider>
+  )
 }
 
 export default App
