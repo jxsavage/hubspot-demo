@@ -18,7 +18,6 @@ const App = () => {
     <div className="App">
       <ResponsiveAppBar menuLinks={menuLinks} siteTitle={siteTitle} ></ResponsiveAppBar>
       <Typography variant='h2'>Jake Savage's Hubspot API Demo</Typography>
-      <Typography variant='h4' sx={{textAlign: 'left'}}>Hello Kaleigh & Friends!</Typography>
       <AllCompanies/>
     </div>
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/21751537.js"></script>
