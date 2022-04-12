@@ -1,9 +1,6 @@
 import React, { useEffect, createContext, useState } from 'react';
 
-export const CRMContext = createContext({
-  companies: [],
-  contacts: []
-});
+export const CRMContext = createContext({});
 function fetchApi(endpoint, args = {}) {
   return async () => {
     const data = await fetch(`/.netlify/functions/${endpoint}`, {
@@ -15,20 +12,27 @@ function fetchApi(endpoint, args = {}) {
   
 }
 const CRMProvider = ({children}) => {
-  const defaultState = {companies: [], contacts: []};
-  const CRMState = defaultState;
-  const [CRMDetails, updateCRMDetails] = useState(CRMState); 
+
+  // const [CRMDetails, updateCRM] = useState({companies: [], contacts: []}); 
+  const [companies, updateCompanies] = useState([]);
+  const [contacts, updateContacts] = useState([]);
   useEffect(() => {
     fetchApi('getCompanies')().then((response) => {
-      const companies = JSON.parse(response.body.msg);
-      updateCRMDetails({
-        ...CRMDetails,
-        companies,
+      response.json().then((r) => {
+        updateCompanies(r);
       })
     })
-  })
+  }, []);
+  useEffect(() => {
+    fetchApi('getContacts')().then((response) => {
+      response.json().then((r) => {
+        updateContacts(r);
+      })
+    })
+  }, []);
+  
   return (
-    <CRMContext.Provider value={CRMDetails}>
+    <CRMContext.Provider value={{companies, contacts, updateCompanies, updateContacts}}>
       {children}
     </CRMContext.Provider>
   )

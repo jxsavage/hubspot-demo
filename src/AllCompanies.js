@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -6,23 +6,27 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import { CRMContext } from "./CRMProvider";
 
 
-export default function AllCompanies({ companies }) {
+export default function AllCompanies() {
+  const { companies } = useContext(CRMContext);
+  
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <List sx={{margin: '10px', width: '100%', bgcolor: 'background.paper' }}>
       {companies.map((
-        { companyName, companyDomain, companyCity, },
+        { properties },
         index
         ) => {
+          const {domain, name} = properties;
         return (
           <>
-            <ListItem alignItems="flex-start">
+            <ListItem key={index} alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar alt={companyName} src="/static/images/avatar/1.jpg" />
+                <Avatar alt={name} src="/static/images/avatar/1.jpg" />
               </ListItemAvatar>
               <ListItemText
-                primary={companyName}
+                primary={name}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -31,14 +35,14 @@ export default function AllCompanies({ companies }) {
                       variant="body2"
                       color="text.primary"
                     >
-                      {`${companyDomain}`}
+                      {`${domain}`}
                     </Typography>
-                    {`— ${companyCity}`}
+                    {`— ${name}`}
                   </React.Fragment>
                 }
               />
             </ListItem>
-            {(index !== companies.length - 1) && <Divider variant="inset" component="li" />}
+            {(index !== companies.length - 1) && <Divider key={`divider-${index}`} variant="inset" component="li" />}
           </>
         )
       })}

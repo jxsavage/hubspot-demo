@@ -4,8 +4,7 @@ import { Client } from "@hubspot/api-client";
 export async function handler(event, context) {
   try {
     const hubspotClient = new Client({apiKey: process.env.HUBSPOT_SECRET})
-    const companies = await hubspotClient.crm.companies
-      .getAll(100);
+    const companies = await hubspotClient.crm.contacts.getAll(99);
     return {
       statusCode: 200,
       body: JSON.stringify(companies),
