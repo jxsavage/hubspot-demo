@@ -5,19 +5,19 @@ export async function handler(event, context) {
   try {
 
     const hubspotClient = new Client({apiKey: process.env.HUBSPOT_SECRET})
-    const properties = JSON.parse(event.body);
+    const companyId = event.body
     
-    console.log(JSON.stringify(properties, null, '  '));
+    console.log(companyId);
     const apiResponse = await hubspotClient
-      .crm.companies.basicApi.create({properties});
+      .crm.companies.basicApi.archive(companyId);
     const body = JSON.stringify(apiResponse);
-    console.log(body);
+    // console.log(body);
     return {
       statusCode: 200,
       body,
     }
     } catch (err) {
-      console.log(err)
+      console.log(JSON.stringify(err, null, '  '))
       return {
         statusCode: 500,
         body: JSON.stringify({ msg: err.message })

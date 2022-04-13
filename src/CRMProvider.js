@@ -1,6 +1,11 @@
 import React, { useEffect, createContext, useState } from 'react';
 
-export const CRMContext = createContext({});
+export const CRMContext = createContext({
+  companies: [],
+  contacts: [],
+  updateCompanies: ({name, domain}) => {return []},
+  updateContacts: ({name, phone}) => {return []}
+});
 function fetchApi(endpoint, args = {}) {
   return async () => {
     const data = await fetch(`/.netlify/functions/${endpoint}`, {
