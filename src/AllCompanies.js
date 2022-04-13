@@ -209,7 +209,7 @@ export default function AllCompanies() {
                         variant="body2"
                         color="text.primary"
                       >
-                        <Link href={domain}>
+                        <Link target="_blank" href={domain}>
                           {`${domain}`}
                         </Link>
 
